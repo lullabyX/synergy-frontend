@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+import AuthContext from '../../store/auth-context';
 import ProfileForm from './ProfileForm';
 import classes from './UserProfile.module.css';
 
