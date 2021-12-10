@@ -46,7 +46,7 @@ export function AuthContextProvider(props: any) {
 		logoutTimer = setTimeout(logoutHandler, remainingTime);
 	}
 
-	const contextValue = {
+	const contextValue:any = {
 		token: token,
 		isLoggedIn: userIsLoggedIn,
 		login: loginHandler,

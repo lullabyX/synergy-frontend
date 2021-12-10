@@ -12,9 +12,7 @@ export default function retrieveStoredToken() {
     if (remainingTime <= 300000)
     {
         localStorage.removeItem('token');
-        localStorage.removeItem('tokenTimeout');
-        
-
+        localStorage.removeItem('tokenTimeout');  
     }
 }
 

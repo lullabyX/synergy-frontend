@@ -43,6 +43,7 @@ const AuthForm = () => {
 
 			const response = await fetch(URL, {
 				method: 'POST',
+				credentials: "include",
 				body: JSON.stringify({
 					email: enteredEmail,
 					password: enteredPassword,
