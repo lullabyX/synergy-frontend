@@ -6,3 +6,21 @@
 .profile h1 {
     font-size: 5rem;
   }
+
+.fab{
+  position: fixed;
+  right:    0;
+  bottom:   0;
+  background-color: #38015c
+}
+
+
+#button {
+  background-color: #38015c;
+  margin: 10px;
+}
+
+.card{
+  margin: 15px;
+  display:grid
+}

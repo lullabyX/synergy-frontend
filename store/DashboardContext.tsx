@@ -1,16 +1,26 @@
 import React, { useContext, useState, createContext, ReactNode } from 'react';
 import axios from 'axios';
+import peopleType from '../interfaces/peopleType';
 
 type contextType = {
-    projects: []
-    setProjects: () => void
+    createdAt: string,
+    creator: string,
+    description:string,
+    member: Array<peopleType>,
+    name: string,
+    updatedAt: string,
+    _id: string
+
 }
 
 const contextDefaultValues:contextType = {
-    projects: [],
-    setProjects: function (): void {
-        throw new Error('Function not implemented.');
-    }
+    createdAt: '',
+    creator: '',
+    description: '',
+    member: [],
+    name: '',
+    updatedAt: '',
+    _id: ''
 }
 
 export const DashboardContext = createContext<contextType>(contextDefaultValues);
@@ -23,11 +33,7 @@ type Props = {
 };
 
 export const DashboardProvidor = ({children}: Props) =>{
-    const [projects,setProjects] = useState([
-        { 
-            name:"database project"
-        }
-    ]);
+    const [projects,setProjects] = useState<projectType[]>(projectDefaultValues);
     const value:any ={
         projects,
         setProjects

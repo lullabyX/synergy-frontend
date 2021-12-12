@@ -12,7 +12,7 @@ const AuthPage = () => {
 		let isLoggedIn = authCtx.isLoggedIn;
 		if (isLoggedIn) {
 			setIsRedirect(true);
-			router.push('/profile');
+			router.push('/dashboard');
 		} else {
 			setIsRedirect(false);
 		}

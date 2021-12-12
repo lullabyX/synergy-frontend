@@ -1,10 +1,13 @@
 import { GetServerSideProps } from 'next';
 import { useContext, useRef, useState } from 'react';
 import AuthContext from '../../store/auth-context';
+import { useRouter } from 'next/router'
+
 
 import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
+	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasError, setHasError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState({});
@@ -39,6 +42,7 @@ const AuthForm = () => {
 
 		setIsLoading(true);
 		if (isLogin) {
+			
 			const URL: string = process.env.POST_LOGIN_URL as string;
 
 			const response = await fetch(URL, {
@@ -62,6 +66,7 @@ const AuthForm = () => {
 				authCtx.login(data.token, expirationTime.toISOString());
 				console.log(data);
 				console.log(response.headers);
+				router.push('/dashboard');
 			} else {
 				setHasError(true);
 

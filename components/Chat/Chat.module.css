@@ -1,0 +1,9 @@
+#button {
+    background-color: #38015c;
+    margin: 10px;
+  }
+.input_field{
+    position: fixed;
+    bottom: 0;
+    margin: 20px;
+}
