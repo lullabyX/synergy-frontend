@@ -34,6 +34,7 @@ export default function Member ({members}) {
 		})
 		.then((res)=>{
 			console.log(res.data);
+			setMemberInfo('')
 			
 		})
 		.catch((error)=>{
@@ -75,18 +76,18 @@ export default function Member ({members}) {
 		console.log(members,"members")
 	},[callUseEffect])
     return (
-        <div className={classes.member}>
-            Member
-            	<div>
+        <div >
+            	<div className={classes.member}>
 					<Card>
 						<TextField
-							sx={{ width: 400 }}
+							sx={{ width: 300 }}
 							id="outlined-basic" 
 							label=" Email/Username" 
 							variant="outlined"
 							value={memberInfo}
 							onChange={(e)=>{setMemberInfo(e.target.value)}}
 						/>
+						<br/>
 						<Button 
 							id = {classes.button}
 							variant="contained"
@@ -99,39 +100,41 @@ export default function Member ({members}) {
 					<br/><br/><br/>
 					<Card>
 						<TextField
-								sx={{ width: 400 }}
+								sx={{ width: 300 }}
 								id="outlined-basic" 
 								label="Task" 
 								variant="outlined"
 								value={task}
 								onChange={(e)=>{setTask(e.target.value)}}
 						/>
+						<br/><br/>
 						<TextField
-								sx={{ width: 400 }}
+								sx={{ width: 300 }}
 								id="outlined-basic" 
 								value={description}
 								label="Short description" 
 								variant="outlined"
 								onChange={(e)=>{setDescription(e.target.value)}}
 						/>
-						<br/>
+						<br/><br/>
 						<TextField
 							id="date"
 							label="Deadline"
 							type="date"
 							defaultValue=""
-							sx={{ width: 220 }}
+							sx={{ width: 300 }}
 							InputLabelProps={{
 							shrink: true,
 							}}
 							value={deadline}
 							onChange={(e)=>{setDeadline(e.target.value)}}
 						/>
-						<br/>
+						<br/><br/>
 						<Select
 							labelId="demo-simple-select-label"
 							id="demo-simple-select"
 							label="Assign Task To"
+							sx={{ width: 300 }}
 							onChange={(e)=>{setAssignedTo(e.target.value)}}
 
 							>
@@ -141,6 +144,7 @@ export default function Member ({members}) {
 							))
 							}
 						</Select>
+						<br/>
 						<Button 
 							id = {classes.button}
 							variant="contained"

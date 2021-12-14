@@ -13,28 +13,30 @@ const MainNavigation = () => {
 				<title>SYNERGY</title>
 			</Head>
 			<header className={classes.header}>
-				<Link href='/' passHref>
+				<Link href='/dashboard' passHref>
 					<div className={classes.logo}>SYNERGY</div>
 				</Link>
-				<nav>
-					<ul>
-						{!authCtx.isLoggedIn && (
-							<li>
-								<Link href='/auth/login'>Login</Link>
-							</li>
-						)}
-						{authCtx.isLoggedIn && (
-							<Fragment>
+				<div>
+					<nav className="navbar sticky-top">
+						<ul>
+							{!authCtx.isLoggedIn && (
 								<li>
-									<Link href='/profile'>Profile</Link>
+									<Link href='/auth/login'>Login</Link>
 								</li>
-								<li>
-									<button onClick={authCtx.logout}>Logout</button>
-								</li>
-							</Fragment>
-						)}
-					</ul>
-				</nav>
+							)}
+							{authCtx.isLoggedIn && (
+								<Fragment>
+									<li>
+										<Link href='/profile'>Profile</Link>
+									</li>
+									<li>
+										<button onClick={authCtx.logout}>Logout</button>
+									</li>
+								</Fragment>
+							)}
+						</ul>
+					</nav>
+				</div>
 			</header>
 		</div>
 	);

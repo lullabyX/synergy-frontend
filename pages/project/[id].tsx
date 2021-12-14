@@ -78,21 +78,24 @@ const ProjectDetails:NextPage = () => {
     useEffect(()=>{   
         fetchTasks();
         //console.log("Tasks")
-	 },[id]);
+	 });
     return (
-        <div className="container-fluid">
+        <div className="container-fluid chat">
             <div className="row justify-content">
-                <div className="col-md-3">
-                    Nav
-                    <Member members={member}/>
+                <div className="col-md-3 fixed">
+                    
+                    <div className="member">
+                        <Member 
+                        members={member}/>
+                    </div>
                     
                 </div>
-                <div className="col-md-7">
-                    Chat
+                <div className="col-md-6">
+                    
                     <Chat/>
                 </div>
-                <div className="col-md-2">
-                    <h1>Tasks</h1>
+                <div className="col-md-3">
+                    
                     {
                         tasks.map((task)=>(
                             <TaskCard 
@@ -102,6 +105,7 @@ const ProjectDetails:NextPage = () => {
                                 assignTo={task.assignedTo}
                                 deadline={task.deadline}
                                 isCompleted={task.isCompleted}
+                                _id={task._id}
                             />
                         ))
                     }

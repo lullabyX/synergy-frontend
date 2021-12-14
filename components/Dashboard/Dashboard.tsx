@@ -16,6 +16,7 @@ import { ConstructionOutlined, TrendingUpSharp } from '@mui/icons-material';
 
 const Dashboard = () => {
 	const [projectName,setProjectName] = useState('');
+	const [description,setDescription] = useState('');
 	const [addIcon,setAddIcon] = useState(false);
 
 	type projectType = {
@@ -54,12 +55,8 @@ const Dashboard = () => {
 			console.log(error.message);
 		});
 	 }
-	 useEffect(()=>{
-		const url:string = process.env.API as string;
-		const URL: string = process.env.POST_LOGIN_URL as string;
-		console.log("env",url);
-		console.log("URL",URL);
-		 axios.get(`http://localhost:8080/room/all`,
+	 const fetchProjectRoom = () => {
+		axios.get(`http://localhost:8080/room/all`,
 		{
 			headers: {
 				'Authorization': "Bearer "+ localStorage.getItem('token') || "none",
@@ -75,7 +72,15 @@ const Dashboard = () => {
 		.catch((error)=>{
 			console.log(error.message);
 		});
-	 },[]);
+	 }
+	 useEffect(()=>{
+		fetchProjectRoom()
+		
+	 });
+	//  useEffect(()=>{
+	// 	fetchProjectRoom()
+		
+	//  },[]);
 	return (
 		<div className={classes.profile}>
             
@@ -86,11 +91,19 @@ const Dashboard = () => {
 			<br/>
 				{addIcon ? 
 				<div>
+					
 					<TextField 
 						id="outlined-basic" 
 						label="Create a project" 
 						variant="outlined"
 						onChange={(e)=>{setProjectName(e.target.value)}}
+					/>
+					<br/><br/>
+					<TextField 
+						id="outlined-basic" 
+						label="Description" 
+						variant="outlined"
+						onChange={(e)=>{setDescription(e.target.value)}}
 					/>
 						<Button 
 							id = {classes.button}
@@ -99,6 +112,7 @@ const Dashboard = () => {
 						>
 							Create
 						</Button>
+						<br/><br/>
 				</div>
 			: null	
 			}
@@ -116,6 +130,7 @@ const Dashboard = () => {
 						<Link href={`project/${room._id}`}>
 							<Grid md={3}>
 								<ProjectCard 
+								_id={room._id}
 								name={room.name}
 								description={room.description}/>
 							</Grid>

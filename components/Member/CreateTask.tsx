@@ -3,7 +3,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-
+import classes from './Member.module.css'
 
 export default function CreateTask (){
     <div>
@@ -46,9 +46,9 @@ export default function CreateTask (){
             </Select>
 
             <Button
-                //id={classes.button}
+                id={classes.button}
                 variant="contained"
-                //onClick={createTask}
+                onClick={createTask}
             >
                 Add
             </Button>

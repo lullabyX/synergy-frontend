@@ -10,32 +10,18 @@ import ChatBox from '../../components/Chat/ChatBox'
 let socket; 
 
 export default function Chat() {
-    type sender = {
-        username: string,
-        _id: string
-    }
-    const senderDefaultValues:sender = {
-        username: '',
-        _id: ''
-    }
+    
     type getMessage = {
         createdAt: string,
         message: string,
-        senderId: sender
+        sender: string
     }
     const getMessageDefaultValue:getMessage ={
         createdAt: '',
         message: '',
-        senderId: {
-            username: '',
-            _id: ''
-        }
+        sender: ''
     }
-    const [getMessages,setGetMessages] = useState([{
-        sender: '',
-        createdAt: '',
-        messages:''
-    }])
+    const [getMessages,setGetMessages] = useState<getMessage[]>([getMessageDefaultValue])
     const [message,setMessage] = useState('');
     const router = useRouter();
     const {id} = router.query;
@@ -53,30 +39,25 @@ export default function Chat() {
 		})
 		.then((res)=>{
 			console.log(res.data);
+            setMessage('')
 		})
 		.catch((error)=>{
 			console.log(error.message);
 		});
-        socket = io(ENDPOINT);
-        const username = localStorage.getItem('username');
-        
-        socket.emit("createMessage", { message, id, username}, (error:any) => {
-            if (error) alert(error);
-          });
     }
-    const ENDPOINT = "http://localhost:8080";
 
-    // useEffect(() => {
-    //     console.log("chat")
-        
-    // }, [id, message])
+    // let start = new Date();
+    // let timer_id = setInterval(function() {
+    // // the duration is 10 seconds
+    // if (new Date() - start > 10000) {
+    //     clearInterval(timer_id);
+    // } else {
+    //     console.log("timer_id")
+    // }
+    // }, 1000);
 
-    useEffect(()=> {
-        socket = io(ENDPOINT);
-        socket.on("createMessage",(data)=>{
-            console.log("data",data)
-        });
-        axios.get(`http://localhost:8080/room/${id}/messages`,
+    const fetchMessages = async () =>{
+        await axios.get(`http://localhost:8080/room/${id}/messages`,
 		{
 			headers: {
 				'Authorization': "Bearer "+ localStorage.getItem('token') || "none",
@@ -97,16 +78,22 @@ export default function Chat() {
 		.catch((error)=>{
 			console.log(error.message);
 		});
-    },[id, message])
+    }
+
+    useEffect(()=> {
+        fetchMessages();
+    });
+
     return (
         <div>
             <ChatBox messages={getMessages} />
             <div className={classes.input_field}>
                 <TextField 
-                    sx={{ width: 900 }}
+                    sx={{ width: 800 }}
                     id="full-width-text-field" 
                     label="Send Your Message" 
                     variant="outlined"
+                    value={message}
                     onChange={(e)=>{setMessage(e.target.value)}}
                 />
                 <Button 

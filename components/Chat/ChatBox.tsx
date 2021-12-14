@@ -16,17 +16,16 @@ export default function ChatBox({messages}){
     
     return (
         <div >
-            ChatBox
             {
                 messages.map((message:any)=>(
                     
                     <div className={(username?.toString().trim() === message.sender.toString().trim()) ? "message own" : "message"}>
                         <div className={classes.messageTop}>
-                            <img
+                            {/* <img
                                 className={"messageImg"}
                                 src="https://images.pexels.com/photos/3686769/pexels-photo-3686769.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
                                 alt=""
-                                />
+                                /> */}
                             <h6>{message.sender}</h6>
                             <p className="messageText">{message.message}</p>
                         </div>

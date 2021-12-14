@@ -6,6 +6,8 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import classes from './Taskcard.module.css';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const bull = (
   <Box
@@ -16,7 +18,51 @@ const bull = (
   </Box>
 );
 
-export default function TaskCard({name,description,assignTo,deadline,isCompleted}) {
+export default function TaskCard({name,description,assignTo,deadline,isCompleted,_id}) {
+  const router = useRouter();
+  const {id} = router.query;
+  const deleteTask = async()=>{
+    console.log("deleteTask",_id);
+    await axios.delete(`http://localhost:8080/room/${id}/task/delete`,
+		{
+      headers: {
+				'Authorization': "Bearer "+ localStorage.getItem('token') || "none",
+				'Content-Type': 'application/json',
+			},
+      data: {
+        taskId: _id
+      }
+		})
+		.then((res)=>{
+			console.log(res.data);
+			
+		})
+		.catch((error)=>{
+			//console.log("here",localStorage.getItem("token"))
+			console.log(error.message);
+		});
+  }
+  const completeTask = async()=>{
+    console.log("deleteTask",_id);
+    await axios.delete(`http://localhost:8080/room/${id}/task/complete`,
+		{
+      headers: {
+				'Authorization': "Bearer "+ localStorage.getItem('token') || "none",
+				'Content-Type': 'application/json',
+			},
+      data: {
+        taskId: _id
+      }
+		})
+		.then((res)=>{
+			console.log(res.data);
+			
+		})
+		.catch((error)=>{
+			//console.log("here",localStorage.getItem("token"))
+			console.log(error.message);
+		});
+  }
   return (
     <Card className={classes.card} sx={{ minWidth: 275 }}>
       <CardContent>
@@ -48,7 +94,18 @@ export default function TaskCard({name,description,assignTo,deadline,isCompleted
         </Typography>
       </CardContent>
       <CardActions>
-        {/* <Button size="small">Learn More</Button> */}
+        <Button 
+          size="small"
+          onClick={completeTask}
+        >
+          Complete
+        </Button>
+        <Button 
+          size="small"
+          onClick={deleteTask}
+        >
+          Delete
+        </Button>
       </CardActions>
     </Card>
   );
