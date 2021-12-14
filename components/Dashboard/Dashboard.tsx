@@ -38,7 +38,8 @@ const Dashboard = () => {
 		
 		await axios.put(`${url}/room/create`,
 		{
-			roomName:projectName
+			roomName:projectName,
+			description: description
 		},
 		{
 			headers: {
@@ -48,20 +49,16 @@ const Dashboard = () => {
 		})
 		.then((res)=>{
 			console.log(res.data);
-			
+			setProjectName('');
+			setDescription('')
 		})
 		.catch((error)=>{
 			console.log("here",localStorage.getItem("token"))
 			console.log(error.message);
 		});
 	 }
-<<<<<<< HEAD
 	 const fetchProjectRoom = () => {
 		axios.get(`http://localhost:8080/room/all`,
-=======
-	 useEffect(()=>{
-		 axios.get(`${process.env.API}/room/all`,
->>>>>>> e723520144f3b31931fc66ec96df3f1c476c1653
 		{
 			headers: {
 				'Authorization': "Bearer "+ localStorage.getItem('token') || "none",
@@ -79,9 +76,8 @@ const Dashboard = () => {
 		});
 	 }
 	 useEffect(()=>{
-		fetchProjectRoom()
-		
-	 });
+		fetchProjectRoom()	
+	 },[projectName,description]);
 	//  useEffect(()=>{
 	// 	fetchProjectRoom()
 		

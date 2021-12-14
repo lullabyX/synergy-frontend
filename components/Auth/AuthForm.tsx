@@ -43,7 +43,7 @@ const AuthForm = () => {
 		setIsLoading(true);
 		if (isLogin) {
 			const URL: string = (process.env.API + '/auth/login') as string;
-
+			console.log(URL)
 			const response = await fetch(URL, {
 				method: 'POST',
 				credentials: 'include',

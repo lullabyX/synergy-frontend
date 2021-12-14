@@ -13,7 +13,6 @@ export default function Member({ members }) {
 	const router = useRouter();
 	const { id } = router.query;
 	//create task
-<<<<<<< HEAD
 	const [task,setTask] = useState('');
 	const [description,setDescription] = useState('');
 	const [deadline,setDeadline] = useState('');
@@ -40,36 +39,6 @@ export default function Member({ members }) {
 			console.log(error.message);
 		});
     }
-=======
-	const [task, setTask] = useState('');
-	const [description, setDescription] = useState('');
-	const [deadline, setDeadline] = useState('');
-	const [assignedTo, setAssignedTo] = useState('');
-	const sendInvitation = async () => {
-		console.log(id, 'id');
-		await axios
-			.put(
-				`${process.env.API}/room/invitation`,
-				{
-					peopleInfo: memberInfo,
-					roomId: id,
-				},
-				{
-					headers: {
-						Authorization:
-							'Bearer ' + localStorage.getItem('token') || 'none',
-						'Content-Type': 'application/json',
-					},
-				}
-			)
-			.then((res) => {
-				console.log(res.data);
-			})
-			.catch((error) => {
-				console.log(error.message);
-			});
-	};
->>>>>>> e723520144f3b31931fc66ec96df3f1c476c1653
 
 	const [callUseEffect, setCallUseEffect] = useState(false);
 	const createTask = async () => {
@@ -105,7 +74,6 @@ export default function Member({ members }) {
 			});
 	};
 
-<<<<<<< HEAD
 	useEffect(()=>{
 		console.log(members,"members")
 	},[callUseEffect])
@@ -191,97 +159,3 @@ export default function Member({ members }) {
         </div>
     )
 }
-=======
-	useEffect(() => {
-		console.log(members, 'members');
-	}, [callUseEffect]);
-	return (
-		<div className={classes.member}>
-			Member
-			<div>
-				<Card>
-					<TextField
-						sx={{ width: 400 }}
-						id='outlined-basic'
-						label=' Email/Username'
-						variant='outlined'
-						value={memberInfo}
-						onChange={(e) => {
-							setMemberInfo(e.target.value);
-						}}
-					/>
-					<Button
-						id={classes.button}
-						variant='contained'
-						onClick={sendInvitation}
-					>
-						Add
-					</Button>
-				</Card>
-				<br />
-				<br />
-				<br />
-				<Card>
-					<TextField
-						sx={{ width: 400 }}
-						id='outlined-basic'
-						label='Task'
-						variant='outlined'
-						value={task}
-						onChange={(e) => {
-							setTask(e.target.value);
-						}}
-					/>
-					<TextField
-						sx={{ width: 400 }}
-						id='outlined-basic'
-						value={description}
-						label='Short description'
-						variant='outlined'
-						onChange={(e) => {
-							setDescription(e.target.value);
-						}}
-					/>
-					<br />
-					<TextField
-						id='date'
-						label='Deadline'
-						type='date'
-						defaultValue=''
-						sx={{ width: 220 }}
-						InputLabelProps={{
-							shrink: true,
-						}}
-						value={deadline}
-						onChange={(e) => {
-							setDeadline(e.target.value);
-						}}
-					/>
-					<br />
-					<Select
-						labelId='demo-simple-select-label'
-						id='demo-simple-select'
-						label='Assign Task To'
-						onChange={(e) => {
-							setAssignedTo(e.target.value);
-						}}
-					>
-						{members.map((member: any) => (
-							<MenuItem value={member.member}>
-								{member.member}
-							</MenuItem>
-						))}
-					</Select>
-					<Button
-						id={classes.button}
-						variant='contained'
-						onClick={createTask}
-					>
-						Add
-					</Button>
-				</Card>
-			</div>
-		</div>
-	);
-}
->>>>>>> e723520144f3b31931fc66ec96df3f1c476c1653

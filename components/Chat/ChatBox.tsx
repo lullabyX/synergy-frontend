@@ -11,7 +11,7 @@ export default function ChatBox({messages}){
         setUsername(localStorage.getItem('username') || null);
         
         console.log(username);
-    },[])
+    })
     
     
     return (
@@ -20,6 +20,8 @@ export default function ChatBox({messages}){
                 messages.map((message:any)=>(
                     
                     <div className={(username?.toString().trim() === message.sender.toString().trim()) ? "message own" : "message"}>
+                        {/* <h1>{username}fasdf</h1>
+                        <h3>{message.sender}</h3> */}
                         <div className={classes.messageTop}>
                             {/* <img
                                 className={"messageImg"}

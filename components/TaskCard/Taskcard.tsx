@@ -44,16 +44,17 @@ export default function TaskCard({name,description,assignTo,deadline,isCompleted
   }
   const completeTask = async()=>{
     console.log("deleteTask",_id);
-    await axios.delete(`http://localhost:8080/room/${id}/task/complete`,
-		{
-      headers: {
-				'Authorization': "Bearer "+ localStorage.getItem('token') || "none",
-				'Content-Type': 'application/json',
-			},
-      data: {
+    await axios.put(`http://localhost:8080/room/${id}/task/complete`,
+      {
         taskId: _id
-      }
-		})
+      },
+      { 
+        headers: {
+              'Authorization': "Bearer "+ localStorage.getItem('token') || "none",
+				      'Content-Type': 'application/json',
+        }  
+			}
+		)
 		.then((res)=>{
 			console.log(res.data);
 			

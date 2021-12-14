@@ -7,5 +7,6 @@ module.exports = {
 		PORT: 8080,
 		PUT_SIGNUP_URL: 'http://localhost:8080/auth/signup',
 		POST_LOGIN_URL: 'http://localhost:8080/auth/login',
+		API: 'http://localhost:8080'
 	},
 };
