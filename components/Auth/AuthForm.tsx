@@ -65,7 +65,8 @@ const AuthForm = () => {
 				);
 				authCtx.login(data.token, expirationTime.toISOString());
 				console.log(data);
-				console.log(response.headers);
+				localStorage.setItem('username',data.username);
+				//console.log(response.headers);
 				router.push('/dashboard');
 			} else {
 				setHasError(true);

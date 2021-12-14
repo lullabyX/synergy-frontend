@@ -6,7 +6,7 @@ import TaskCard from '../../components/TaskCard/Taskcard';
 import Chat from '../../components/Chat/Chat';
 import peopleType from '../../interfaces/peopleType';
 import Member from '../../components/Member/Member'
-
+import CreateTask from '../../components/Member/CreateTask';
 const ProjectDetails:NextPage = () => {
 
     type taskType = {
@@ -27,8 +27,22 @@ const ProjectDetails:NextPage = () => {
         name: '',
         deadline: ''
     }
+    type peopleId = {
+        email: string,
+        username: string,
+        _id: string
+    }
+    type members ={
+
+    }
+    const peopleIdDefaults:peopleId = {
+        email: '',
+        username: '',
+        _id: ''
+    }
+    const [member,setMember] = useState<peopleId[]>([peopleIdDefaults])
     const [tasks,setTasks] = useState<taskType[]>([taskDefaultValues]);
-    const router = useRouter()
+    const router = useRouter();
     const {id} = router.query;
     async function fetchTasks(){
         console.log("id: ",id);
@@ -41,11 +55,19 @@ const ProjectDetails:NextPage = () => {
         })
         .then(async(res:any)=>{
             console.log("assignTo",res.data);
-            let data = res.data.tasks;
-            data = await data.map((task:any)=>{
+            let dataTask = res.data.tasks;
+            dataTask = dataTask.map((task:any)=>{
                 return {...task, assignedTo: task.assignedTo.peopleId.username}
             })
-            setTasks(data)
+            setTasks(dataTask);
+
+            let dataMember = res.data.room.member.peoples;
+            dataMember = dataMember.map((eachMember:any)=>{
+                return {...eachMember,member:eachMember.peopleId.username}
+                //console.log(eachMember.peopleId.username,"mem")
+            })
+            setMember(dataMember);
+            //console.log(dataMember[0].peopleId.username,"dataMember");
             
         })
         .catch((error)=>{
@@ -55,13 +77,15 @@ const ProjectDetails:NextPage = () => {
     }
     useEffect(()=>{   
         fetchTasks();
+        //console.log("Tasks")
 	 },[id]);
     return (
         <div className="container-fluid">
             <div className="row justify-content">
                 <div className="col-md-3">
                     Nav
-                    <Member/>
+                    <Member members={member}/>
+                    
                 </div>
                 <div className="col-md-7">
                     Chat

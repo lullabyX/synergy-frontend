@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 let logoutTimer: NodeJS.Timeout;
 
 const AuthContext = React.createContext({
+	username: '',
 	token: '',
 	isLoggedIn: false,
 	login: (token: string) => {},
