@@ -55,11 +55,7 @@ const Dashboard = () => {
 		});
 	 }
 	 useEffect(()=>{
-		const url:string = process.env.API as string;
-		const URL: string = process.env.POST_LOGIN_URL as string;
-		console.log("env",url);
-		console.log("URL",URL);
-		 axios.get(`http://localhost:8080/room/all`,
+		 axios.get(`${process.env.API}/room/all`,
 		{
 			headers: {
 				'Authorization': "Bearer "+ localStorage.getItem('token') || "none",

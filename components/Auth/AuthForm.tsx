@@ -42,12 +42,11 @@ const AuthForm = () => {
 
 		setIsLoading(true);
 		if (isLogin) {
-			
-			const URL: string = process.env.POST_LOGIN_URL as string;
+			const URL: string = (process.env.API + '/auth/login') as string;
 
 			const response = await fetch(URL, {
 				method: 'POST',
-				credentials: "include",
+				credentials: 'include',
 				body: JSON.stringify({
 					email: enteredEmail,
 					password: enteredPassword,
@@ -85,7 +84,7 @@ const AuthForm = () => {
 				enteredConfirmPassword = confirmPasswordInputRef.current.value;
 			}
 
-			let URL: string = process.env.PUT_SIGNUP_URL as string;
+			let URL: string = (process.env.API + '/auth/signup') as string;
 
 			fetch(URL, {
 				method: 'PUT',
