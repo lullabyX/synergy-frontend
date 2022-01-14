@@ -12,7 +12,7 @@ There are many colaborative app out there like trello, slack etc which are excel
 * create and assign tasks for project members
 * you can even use it as your personal task manager, neat isn't it?
 
-[![Synergy](https://res.cloudinary.com/marcomontalbano/image/upload/v1639473885/video_to_markdown/images/video--3cf180007dfdf4e722498c8d339150ac-c05b58ac6eb4c4700831b2b3070cd403.jpg)](https://res.cloudinary.com/dxaiffb1m/video/upload/v1639473859/synergy_scasrb.mp4 "Synergy")
+
 
 ## [**Backend**](https://github.com/Mahmud-007/SYNERGY-backend)
 ### Deploy at your own machine
